@@ -11,21 +11,28 @@ client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
 )
 
-print("Asking the AI...")
+print("Ask me anything. Type 'quit' to stop.")
 
-response = client.chat.completions.create(
-    model="openai/gpt-oss-120b",
-    messages=[
-        {"role": "user", "content": "How is AI evolving? Answer in five sentences"}
-    ],
-)
+while True:
+    question = input("\nYour question: ")
 
-answer = response.choices[0].message.content
+    if question.strip().lower() == "quit":
+        print("Goodbye!")
+        break
 
-model = response.model
+    if not question.strip():
+        print("Please type something.")
+        continue
 
-print(answer)
-print(f"Answer from Model: {model}")
+    print("\nAsking the AI...")
 
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-120b",
+        messages=[
+            {"role": "user", "content": question}
+        ],
+    )
 
+    answer = response.choices[0].message.content
 
+    print(f"\nAnswer is: {answer}")
