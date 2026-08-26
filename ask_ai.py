@@ -1,15 +1,11 @@
-print("Hello, welcome to the Ask AI Project!")
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
-name = input("Enter your name: ")
+api_key = os.getenv("GROQ_API_KEY")
 
-city = input("Enter your city: ")
-
-print(f"Hello {name}, nice to meet you. You live in {city}.")
-
-
-num = input("Enter your age: ")
-
-print(f"Your age is {num} and the type of {num} is {type(num)}")
-print(f"Next year you will be {int(num) + 1} years old")
-
+if api_key:
+    print(f"Key loaded. Starts with {api_key[:8]}, length {len(api_key)}.")
+else:
+    print("No key found. Check that .env exists and contains GROQ_API_KEY.")
