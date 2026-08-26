@@ -16,11 +16,16 @@ print("Asking the AI...")
 response = client.chat.completions.create(
     model="openai/gpt-oss-120b",
     messages=[
-        {"role": "user", "content": "What is an API? Explain in three simple sentences."}
+        {"role": "user", "content": "How is AI evolving? Answer in five sentences"}
     ],
 )
 
 answer = response.choices[0].message.content
 
+model = response.model
+
 print(answer)
+print(f"Answer from Model: {model}")
+
+
 
