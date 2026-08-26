@@ -1,11 +1,26 @@
 import os
 from dotenv import load_dotenv
+from openai import OpenAI
 
 load_dotenv()
 
 api_key = os.getenv("GROQ_API_KEY")
 
-if api_key:
-    print(f"Key loaded. Starts with {api_key[:8]}, length {len(api_key)}.")
-else:
-    print("No key found. Check that .env exists and contains GROQ_API_KEY.")
+client = OpenAI(
+    api_key=api_key,
+    base_url="https://api.groq.com/openai/v1",
+)
+
+print("Asking the AI...")
+
+response = client.chat.completions.create(
+    model="openai/gpt-oss-120b",
+    messages=[
+        {"role": "user", "content": "What is an API? Explain in three simple sentences."}
+    ],
+)
+
+answer = response.choices[0].message.content
+
+print(answer)
+
