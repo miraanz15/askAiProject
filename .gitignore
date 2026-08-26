@@ -1,0 +1,9 @@
+# Secrets - never commit these
+.env
+
+# Virtual environment - rebuildable, not source code
+.venv/
+
+# Python's generated cache files
+__pycache__/
+*.pyc
